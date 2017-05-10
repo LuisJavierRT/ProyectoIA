@@ -9,7 +9,10 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Adapter;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.zxing.Result;
@@ -24,6 +27,8 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
     private boolean isFlashOn;
     private boolean hasFlash;
     private ImageView btnCamera;
+    private ImageView btnPanels;
+
 
 
     @Override
@@ -47,20 +52,34 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
         mScannerView.setResultHandler(this);
         mScannerView.startCamera();
 
+
+
         btnCamera = (ImageView) findViewById(R.id.btn_camera);
         btnCamera.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
+
                 mScannerView = (ZXingScannerView) findViewById(R.id.zxscan);
                 mScannerView.setResultHandler(MainActivity.this);
                 mScannerView.startCamera();
             }
         });
-
         btnFlash.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 turnOnFlash();
             }
         });
+
+
+
+        btnPanels = (ImageView) findViewById(R.id.btn_panels);
+        btnPanels.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                Intent intent = new Intent(MainActivity.this, PanelsActivity.class);
+                startActivity(intent);
+                mScannerView.resumeCameraPreview(MainActivity.this);
+            }
+        });
+
 
     }
 
@@ -88,47 +107,32 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
         }
     }
 
-    /*@Override
-    public void onResume() {
-        super.onResume();
-        mScannerView.setResultHandler(this); // Register ourselves as a handler for scan results.
-        mScannerView.startCamera();          // Start camera on resume
-    }*/
-
 
     public void QrScanner(View view){
-
-        /*mScannerView = new ZXingScannerView(this);   // Programmatically initialize the scanner view
-        this.setContentView(mScannerView);
-
-        mScannerView.setResultHandler(this); // Register ourselves as a handler for scan results.
-        mScannerView.startCamera();         // Start camera*/
 
         mScannerView = (ZXingScannerView) findViewById(R.id.zxscan);
         mScannerView.setResultHandler(this);
         mScannerView.startCamera();
     }
-    /*
+
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        mScannerView = (ZXingScannerView) findViewById(R.id.zxscan);
+        mScannerView.setResultHandler(MainActivity.this);
+        mScannerView.startCamera();
+    }
 
     @Override
     public void onPause() {
         super.onPause();
-        mScannerView.stopCamera();           // Stop camera on pause
-    }*/
+        mScannerView.stopCamera();
+    }
 
     @Override
     public void handleResult(Result result) {
-        // Do something with the result here
 
-        /*Log.e("handler", result.getText()); // Prints scan results
-        Log.e("handler", result.getBarcodeFormat().toString()); // Prints the scan format (qrcode)
-
-        // show the scanner result into dialog box.
-        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
-        builder.setTitle("Scan Result");
-        builder.setMessage(result.getText());
-        android.app.AlertDialog alert1 = builder.create();
-        alert1.show();*/
 
         Toast.makeText(this,result.getText(),Toast.LENGTH_SHORT).show();
         mScannerView.resumeCameraPreview(this);
