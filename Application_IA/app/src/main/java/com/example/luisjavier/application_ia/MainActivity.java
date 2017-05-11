@@ -17,6 +17,8 @@ import android.widget.Toast;
 
 import com.google.zxing.Result;
 
+import org.opencv.android.OpenCVLoader;
+
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
 public class MainActivity extends AppCompatActivity implements ZXingScannerView.ResultHandler{
@@ -28,8 +30,16 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
     private boolean hasFlash;
     private ImageView btnCamera;
     private ImageView btnPanels;
+    private static String TAG = "MainActivity";
 
-
+    static{
+        if(!OpenCVLoader.initDebug()){
+            Log.d(TAG,"OpenCV not loaded");
+        }
+        else{
+            Log.d(TAG,"OpenCV loaded");
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
