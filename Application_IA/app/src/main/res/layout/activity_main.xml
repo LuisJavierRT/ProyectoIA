@@ -4,49 +4,58 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.luisjavier.application_ia.MainActivity">
+    tools:context="com.example.luisjavier.application_ia.MainActivity"
+    tools:layout_editor_absoluteY="81dp"
+    tools:layout_editor_absoluteX="0dp">
 
     <me.dm7.barcodescanner.zxing.ZXingScannerView
         android:id="@+id/zxscan"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
     </me.dm7.barcodescanner.zxing.ZXingScannerView>
 
-
     <ImageView
-        android:id="@+id/btn_panels"
-        android:layout_width="57dp"
+        android:id="@+id/btn_qrCode"
+        android:layout_width="50dp"
         android:layout_height="50dp"
-        app:srcCompat="@drawable/panels"
-        tools:layout_editor_absoluteX="207dp"
-        tools:layout_editor_absoluteY="434dp"
-        android:layout_marginLeft="45dp"
-        android:layout_marginStart="45dp"
-        android:layout_alignBottom="@+id/btn_camera"
-        android:layout_toRightOf="@+id/btn_camera"
-        android:layout_toEndOf="@+id/btn_camera" />
-
-    <ImageView
-        android:id="@+id/btn_camera"
-        android:layout_width="53dp"
-        android:layout_height="56dp"
-        app:srcCompat="@drawable/camera"
-        android:layout_marginLeft="81dp"
-        android:layout_marginStart="81dp"
-        android:layout_marginBottom="11dp"
-        android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/btn_flash"
-        android:layout_toEndOf="@+id/btn_flash" />
+        app:srcCompat="@drawable/qrcode"
+        android:layout_marginRight="38dp"
+        android:layout_marginEnd="38dp"
+        android:layout_alignBottom="@+id/btn_panelSolar"
+        android:layout_toLeftOf="@+id/btn_panelSolar"
+        android:layout_toStartOf="@+id/btn_panelSolar" />
 
     <ImageView
         android:id="@+id/btn_flash"
         android:layout_width="36dp"
         android:layout_height="37dp"
         app:srcCompat="@drawable/flash"
-        tools:layout_editor_absoluteX="33dp"
-        tools:layout_editor_absoluteY="-21dp" />
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/zxscan"
+        android:layout_toEndOf="@+id/zxscan" />
+
+    <ImageView
+        android:id="@+id/btn_panels"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:srcCompat="@drawable/panels"
+        android:layout_marginBottom="17dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/btn_panelSolar"
+        android:layout_toEndOf="@+id/btn_panelSolar"
+        android:layout_marginLeft="36dp"
+        android:layout_marginStart="36dp" />
+
+    <ImageView
+        android:id="@+id/btn_panelSolar"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        app:srcCompat="@drawable/panelsolar"
+        android:layout_alignBottom="@+id/btn_panels"
+        android:layout_centerHorizontal="true" />
+
+
 
 
 </RelativeLayout>

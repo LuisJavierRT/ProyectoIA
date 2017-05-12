@@ -30,6 +30,8 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
     private boolean hasFlash;
     private ImageView btnCamera;
     private ImageView btnPanels;
+    private ImageView btnPanelSolar;
+
     private static String TAG = "MainActivity";
 
     static{
@@ -64,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
 
 
 
-        btnCamera = (ImageView) findViewById(R.id.btn_camera);
+        btnCamera = (ImageView) findViewById(R.id.btn_panelSolar);
         btnCamera.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
 
@@ -90,6 +92,14 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
             }
         });
 
+        btnPanelSolar = (ImageView) findViewById(R.id.btn_panelSolar);
+        btnPanelSolar.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                Intent intent = new Intent(MainActivity.this, OpenCVCamaraActivity.class);
+                startActivity(intent);
+                //mScannerView.resumeCameraPreview(MainActivity.this);
+            }
+        });
 
     }
 

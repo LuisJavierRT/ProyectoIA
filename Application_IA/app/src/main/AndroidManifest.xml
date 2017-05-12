@@ -22,7 +22,28 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".PanelsActivity"></activity>
+        <activity android:name=".PanelsActivity" />
+        <activity android:name=".OpenCVCamaraActivity"></activity>
     </application>
+
+<!--
+<supports-screens
+    android:anyDensity="true"
+    android:largeScreens="true"
+    android:normalScreens="true"
+    android:resizeable="true"
+    android:smallScreens="true" />
+
+    <uses-sdk android:minSdkVersion="8" />
+
+    <uses-feature
+    android:name="android.hardware.camera.autofocus"
+    android:required="false" />
+    <uses-feature
+    android:name="android.hardware.camera.front"
+    android:required="false" />
+    <uses-feature
+    android:name="android.hardware.camera.front.autofocus"
+    android:required="false" />  -->
 
 </manifest>
