@@ -66,13 +66,17 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
 
 
 
-        btnCamera = (ImageView) findViewById(R.id.btn_panelSolar);
+        btnCamera = (ImageView) findViewById(R.id.btn_qrCode);
         btnCamera.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
 
-                mScannerView = (ZXingScannerView) findViewById(R.id.zxscan);
-                mScannerView.setResultHandler(MainActivity.this);
-                mScannerView.startCamera();
+                //mScannerView = (ZXingScannerView) findViewById(R.id.zxscan);
+                //mScannerView.setResultHandler(MainActivity.this);
+                //mScannerView.startCamera();
+                mScannerView.stopCamera();
+                Intent intent = new Intent(MainActivity.this, MainActivity_show_camera.class);
+                startActivity(intent);
+                //mScannerView.resumeCameraPreview(MainActivity.this);
             }
         });
         btnFlash.setOnClickListener(new View.OnClickListener(){
@@ -86,6 +90,7 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
         btnPanels = (ImageView) findViewById(R.id.btn_panels);
         btnPanels.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
+                //mScannerView.stopCamera();
                 Intent intent = new Intent(MainActivity.this, PanelsActivity.class);
                 startActivity(intent);
                 mScannerView.resumeCameraPreview(MainActivity.this);
@@ -98,6 +103,9 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
                 Intent intent = new Intent(MainActivity.this, OpenCVCamaraActivity.class);
                 startActivity(intent);
                 //mScannerView.resumeCameraPreview(MainActivity.this);
+
+                //Intent intent = new Intent(MainActivity.this, MainActivity_show_camera.class);
+                //startActivity(intent);
             }
         });
 

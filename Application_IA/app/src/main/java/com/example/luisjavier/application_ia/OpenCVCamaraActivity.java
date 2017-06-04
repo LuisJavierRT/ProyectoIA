@@ -1,5 +1,7 @@
 package com.example.luisjavier.application_ia;
 
+import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 
 import android.app.Activity;
@@ -9,8 +11,11 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.SurfaceView;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.CameraBridgeViewBase;
@@ -32,8 +37,10 @@ import org.opencv.imgproc.Imgproc;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.Time;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Timer;
 
 
 public class OpenCVCamaraActivity extends Activity implements CameraBridgeViewBase.CvCameraViewListener2 {
@@ -50,6 +57,7 @@ public class OpenCVCamaraActivity extends Activity implements CameraBridgeViewBa
     Mat descriptors2,descriptors1;
     Mat img1;
     MatOfKeyPoint keypoints1,keypoints2;
+
 
     static {
         if (!OpenCVLoader.initDebug())
@@ -71,8 +79,8 @@ public class OpenCVCamaraActivity extends Activity implements CameraBridgeViewBa
                         e.printStackTrace();
                     }
                 }
-                break;
-                default: {
+                    break;
+                    default: {
                     super.onManagerConnected(status);
                 }
                 break;
@@ -87,7 +95,7 @@ public class OpenCVCamaraActivity extends Activity implements CameraBridgeViewBa
         matcher = DescriptorMatcher.create(DescriptorMatcher.BRUTEFORCE_HAMMING);
         img1 = new Mat();
         AssetManager assetManager = getAssets();
-        InputStream istr = assetManager.open("fotomoneda.jpg");
+        InputStream istr = assetManager.open("fotopanel.jpg");
         Bitmap bitmap = BitmapFactory.decodeStream(istr);
         Utils.bitmapToMat(bitmap, img1);
         Imgproc.cvtColor(img1, img1, Imgproc.COLOR_RGB2GRAY);
@@ -111,6 +119,8 @@ public class OpenCVCamaraActivity extends Activity implements CameraBridgeViewBa
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
+
+
         Log.i(TAG, "called onCreate");
         super.onCreate(savedInstanceState);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -118,7 +128,8 @@ public class OpenCVCamaraActivity extends Activity implements CameraBridgeViewBa
         mOpenCvCameraView = (CameraBridgeViewBase) findViewById(R.id.tutorial1_activity_java_surface_view);
         mOpenCvCameraView.setVisibility(SurfaceView.VISIBLE);
         mOpenCvCameraView.setCvCameraViewListener(this);
-        tvName = (TextView) findViewById(R.id.text1);
+        //tvName = (TextView) findViewById(R.id.text1);
+
 
     }
 
@@ -167,6 +178,7 @@ public class OpenCVCamaraActivity extends Activity implements CameraBridgeViewBa
         MatOfDMatch matches = new MatOfDMatch();
         if (img1.type() == aInputFrame.type()) {
             matcher.match(descriptors1, descriptors2, matches);
+
         } else {
             return aInputFrame;
         }
@@ -189,9 +201,12 @@ public class OpenCVCamaraActivity extends Activity implements CameraBridgeViewBa
                 good_matches.addLast(matchesList.get(i));
         }
 
+
+
+
         MatOfDMatch goodMatches = new MatOfDMatch();
         goodMatches.fromList(good_matches);
-        Mat outputImg = new Mat();
+        final Mat outputImg = new Mat();
         MatOfByte drawnMatches = new MatOfByte();
         if (aInputFrame.empty() || aInputFrame.cols() < 1 || aInputFrame.rows() < 1) {
             return aInputFrame;
@@ -199,14 +214,31 @@ public class OpenCVCamaraActivity extends Activity implements CameraBridgeViewBa
         Features2d.drawMatches(img1, keypoints1, aInputFrame, keypoints2, goodMatches, outputImg, GREEN, RED, drawnMatches, Features2d.NOT_DRAW_SINGLE_POINTS);
         Imgproc.resize(outputImg, outputImg, aInputFrame.size());
 
+
+        /*if(good_matches.size() > 100) {
+            Toast.makeText(getApplicationContext(), "Panel detectado", Toast.LENGTH_SHORT).show();
+        }*/
+
         return outputImg;
+
     }
 
     public Mat onCameraFrame(CvCameraViewFrame inputFrame) {
+
         return recognize(inputFrame.rgba());
 
     }
 }
+/*
+    final Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+@Override
+public void run() {
+        Toast.makeText(OpenCVCamaraActivity.this, "Panel detectado", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(OpenCVCamaraActivity.this, MainActivity_show_camera.class);
+        startActivity(intent);
+        }
+        }, 3000);*/
 /*
 public class OpenCVCamaraActivity extends AppCompatActivity {
 

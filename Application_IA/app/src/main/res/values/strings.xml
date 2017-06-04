@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Application_IA</string>
+    <string name="title_activity_panel__info_">Panel_Info_Activity</string>
+    <string name="title_activity_info_panel">InfoPanelActivity</string>
 </resources>

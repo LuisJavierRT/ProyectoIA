@@ -8,6 +8,23 @@
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.flash" />
 
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:resizeable="true"
+        android:smallScreens="true" />
+
+    <uses-feature
+        android:name="android.hardware.camera.autofocus"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.front"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.front.autofocus"
+        android:required="false" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -23,27 +40,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".PanelsActivity" />
-        <activity android:name=".OpenCVCamaraActivity"></activity>
+        <activity android:name=".OpenCVCamaraActivity" />
+        <activity android:name=".MainActivity_show_camera" />
+        <activity android:name=".InfoPanelActivity"></activity>
     </application>
-
-<!--
-<supports-screens
-    android:anyDensity="true"
-    android:largeScreens="true"
-    android:normalScreens="true"
-    android:resizeable="true"
-    android:smallScreens="true" />
-
-    <uses-sdk android:minSdkVersion="8" />
-
-    <uses-feature
-    android:name="android.hardware.camera.autofocus"
-    android:required="false" />
-    <uses-feature
-    android:name="android.hardware.camera.front"
-    android:required="false" />
-    <uses-feature
-    android:name="android.hardware.camera.front.autofocus"
-    android:required="false" />  -->
 
 </manifest>
